@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://2k3cthx0j6mp"]
+
+[ext_resource type="Script" uid="uid://cs7rbwo8eqhic" path="res://player.gd" id="1_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://bhjvlq80k18jt" path="res://sprites/player1.png" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://cg46buagmg46l" path="res://sprites/player2.png" id="2_i3pqv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
+radius = 6.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sweqy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_onrkg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i3pqv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="player" type="Area2D" groups=["player"]]
+script = ExtResource("1_i3pqv")
+
+[node name="hit_zone" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hqtel")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sweqy")
+frame_progress = 0.79964155
+
+[node name="reload_timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]

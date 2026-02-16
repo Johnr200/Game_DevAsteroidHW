@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdxgrhgnk6f73"]
+
+[ext_resource type="Texture2D" uid="uid://bewa2gev6x51h" path="res://sprites/shot1.png" id="1_3ldfn"]
+[ext_resource type="Script" uid="uid://cxkwsl7yjbnla" path="res://shot.gd" id="1_f4qg3"]
+[ext_resource type="Texture2D" uid="uid://c02gbhhinjffn" path="res://sprites/shot2.png" id="2_f4qg3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w34ps"]
+size = Vector2(11, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5isyo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3ldfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_f4qg3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="shot" type="Area2D" groups=["shot"]]
+script = ExtResource("1_f4qg3")
+
+[node name="damage_zone" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_w34ps")
+
+[node name="laser" type="AnimatedSprite2D" parent="damage_zone"]
+position = Vector2(0, -9.536743e-07)
+scale = Vector2(0.96875, 0.8125)
+sprite_frames = SubResource("SpriteFrames_5isyo")
+frame_progress = 0.13667154
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

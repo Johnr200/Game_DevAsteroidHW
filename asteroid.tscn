@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://e4dm6b5siq4l"]
+
+[ext_resource type="Script" uid="uid://k0lymod880ru" path="res://asteroid.gd" id="1_gm5ib"]
+[ext_resource type="Texture2D" uid="uid://cww1sb64iph53" path="res://sprites/asteroid1.png" id="1_p0ukn"]
+[ext_resource type="Texture2D" uid="uid://bn30o22hhjn5k" path="res://sprites/asteroid2.png" id="2_gm5ib"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8gfwb"]
+radius = 6.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mc61r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_p0ukn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gm5ib")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="asteroid" type="Area2D"]
+script = ExtResource("1_gm5ib")
+
+[node name="hit_zone" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8gfwb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mc61r")
+frame_progress = 0.8820415
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

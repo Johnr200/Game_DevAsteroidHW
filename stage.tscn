@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://c55xssfkr780g"]
+
+[ext_resource type="Texture2D" uid="uid://peyo6w7sy3gh" path="res://sprites/background.png" id="1_6eo5e"]
+[ext_resource type="Script" uid="uid://brwx1tufgpkqa" path="res://stage.gd" id="1_aees8"]
+[ext_resource type="PackedScene" uid="uid://2k3cthx0j6mp" path="res://player.tscn" id="3_rnkuw"]
+
+[node name="stage" type="Node2D"]
+script = ExtResource("1_aees8")
+
+[node name="spawn_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+texture = ExtResource("1_6eo5e")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="score" type="Label" parent="ui"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1.9893174, 1.331931, 0.5512848, 1)
+text = "score: 0"
+uppercase = true
+
+[node name="retry" type="Label" parent="ui"]
+visible = false
+offset_left = 64.0
+offset_top = 63.0
+offset_right = 261.0
+offset_bottom = 112.0
+text = "Game Over
+-press enter key to replay"
+horizontal_alignment = 1
+
+[node name="player" parent="." instance=ExtResource("3_rnkuw")]
+position = Vector2(64, 88)
+
+[connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]
